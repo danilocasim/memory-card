@@ -1,9 +1,8 @@
 import "./styles/App.css";
-import { useState } from "react";
-import { HelloWorld } from "./components/HelloWorld";
+import { DisplayCards } from "./components/DisplayCards";
 
 export function App() {
-  return <HelloWorld name={"World"}></HelloWorld>;
+  return <DisplayCards></DisplayCards>;
 }
 
 export default App;
