@@ -1,13 +1,13 @@
 import { Card } from "./Card";
+import { useState } from "react";
 import { usePokemonData } from "./PokemonData";
 
 export function DisplayCards() {
-  const pokemon = usePokemonData();
+  const [pokemons, setPokemons] = useState(usePokemonData());
 
-  console.log(pokemon);
   return (
     <div className='cards'>
-      {pokemon.map((pokemon) => (
+      {pokemons.map((pokemon) => (
         <Card
           key={pokemon.id}
           onClick={() => alert(pokemon.name)}
