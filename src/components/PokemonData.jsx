@@ -32,8 +32,9 @@ export function usePokemonData() {
               url: json.sprites.front_default,
               id: json.id,
             });
-            setPokemonsArr(allPokemons);
           }
+          if (allPokemons.length === names.length - 1)
+            setPokemonsArr(allPokemons);
         });
     });
 
