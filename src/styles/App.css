@@ -17,9 +17,9 @@ dialog {
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  width: calc(100px + 10vw);
+  width: calc(100px + 20vw);
   height: calc(100px + 10vh);
-  position: absolute; /* Important */
+  position: fixed; /* Important */
   top: 50%; /* Position Y halfway in */
   left: 50%; /* Position X halfway in */
   transform: translate(-50%, -50%);
@@ -96,5 +96,11 @@ footer {
 @media (max-width: 437px) {
   .game-name {
     display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  dialog {
+    width: 60vw;
   }
 }
