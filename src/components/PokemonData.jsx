@@ -2,12 +2,25 @@ import { useState, useEffect } from "react";
 
 export function usePokemonData() {
   const [pokemonsArr, setPokemonsArr] = useState([]);
-  const url = "https://pokeapi.co/api/v2/pokemon-form/";
 
   useEffect(() => {
     let ignore = false;
-
-    const names = ["charizard", "pikachu", "raichu", "dialga"];
+    const url = "https://pokeapi.co/api/v2/pokemon-form/";
+    const names = [
+      "charizard",
+      "pikachu",
+      "raichu",
+      "dialga",
+      "bulbasaur",
+      "ditto",
+      "infernape",
+      "giratina",
+      "garchomp",
+      "rayquaza",
+      "groudon",
+      "latias",
+      "aggron",
+    ];
     const allPokemons = [];
     names.forEach(async (name) => {
       fetch(url + name)
@@ -24,7 +37,9 @@ export function usePokemonData() {
         });
     });
 
-    return () => (ignore = true);
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return pokemonsArr;
