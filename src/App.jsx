@@ -5,7 +5,7 @@ import { NavBar } from "./components/NavBar";
 import { TryAgain } from "./components/TryAgain";
 
 export function App() {
-  const [score, setScore] = useState(11);
+  const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cardsId, setCardsId] = useState([]);
   const isWin = score === 12;
