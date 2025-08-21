@@ -1,8 +1,8 @@
-export function Card({ key, url, name, onClick }) {
+export function Card({ url, name, onClick }) {
   return (
-    <div key={key} onClick={onClick} className='card'>
+    <div onClick={onClick} className='card'>
       <img src={url} alt='card' />
-      <p>{name}</p>
+      <p>{name[0].toUpperCase() + name.slice(1)}</p>
     </div>
   );
 }
