@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function usePokemonData() {
-  const [pokemonsArr, setPokemonsArr] = useState([]);
+  const [pokemons, setPokemons] = useState(null);
 
   useEffect(() => {
     let ignore = false;
@@ -33,8 +33,7 @@ export function usePokemonData() {
               id: json.id,
             });
           }
-          if (allPokemons.length === names.length - 1)
-            setPokemonsArr(allPokemons);
+          if (allPokemons.length === names.length - 1) setPokemons(allPokemons);
         });
     });
 
@@ -43,5 +42,5 @@ export function usePokemonData() {
     };
   }, []);
 
-  return pokemonsArr;
+  return [pokemons, setPokemons];
 }

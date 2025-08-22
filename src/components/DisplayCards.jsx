@@ -1,16 +1,9 @@
 import { Card } from "./Card";
 import { usePokemonData } from "./PokemonData";
-import { useEffect, useState } from "react";
 import { Fragment } from "react";
 
 export function DisplayCards({ isUnique }) {
-  const initialPokemons = usePokemonData();
-
-  const [pokemons, setPokemons] = useState(initialPokemons);
-
-  useEffect(() => {
-    setPokemons(initialPokemons);
-  }, [initialPokemons]);
+  const [pokemons, setPokemons] = usePokemonData();
 
   const shufflePokemons = () => {
     const newArr = [...pokemons];
