@@ -4,9 +4,7 @@ export function usePokemonData() {
   const [pokemons, setPokemons] = useState(null);
 
   useEffect(() => {
-    let ignore = false;
-    const url = "https://pokeapi.co/api/v2/pokemon-form/";
-    const names = [
+    const pokemonNames = [
       "charizard",
       "pikachu",
       "raichu",
@@ -14,31 +12,30 @@ export function usePokemonData() {
       "bulbasaur",
       "ditto",
       "infernape",
-      "giratina",
       "garchomp",
       "rayquaza",
       "groudon",
       "latias",
       "aggron",
     ];
-    const allPokemons = [];
-    names.forEach(async (name) => {
-      fetch(url + name)
+
+    const controller = new AbortController();
+    const promises = pokemonNames.map((name) =>
+      fetch(`https://pokeapi.co/api/v2/pokemon-form/${name}`, {
+        signal: controller.signal,
+      })
         .then((response) => response.json())
-        .then((json) => {
-          if (!ignore) {
-            allPokemons.push({
-              name: json.name,
-              url: json.sprites.front_default,
-              id: json.id,
-            });
-          }
-          if (allPokemons.length === names.length - 1) setPokemons(allPokemons);
-        });
-    });
+        .then((json) => ({
+          name: json.name,
+          url: json.sprites.front_default,
+          id: json.id,
+        }))
+    );
+
+    Promise.all(promises).then(setPokemons);
 
     return () => {
-      ignore = true;
+      controller.abort();
     };
   }, []);
 
