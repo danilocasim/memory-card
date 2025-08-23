@@ -5,47 +5,42 @@ import { NavBar } from "./components/NavBar";
 import { TryAgain } from "./components/TryAgain";
 
 export function App() {
-  const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cardsId, setCardsId] = useState([]);
-  const isWin = score === 12;
 
   const resetScores = () => {
-    setScore(0);
+    setCardsId([]);
     setBestScore(0);
   };
 
-  const incrementScore = () => {
-    const newScore = score + 1;
-    const isBestScore = score < newScore && newScore > bestScore;
-    setScore(newScore);
-
-    if (isBestScore) setBestScore(newScore);
-    if (newScore > 12) {
+  const bestScores = (score) => {
+    const isBestScore = score >= bestScore;
+    if (isBestScore) setBestScore(score);
+    if (score === 12) {
       resetScores();
     }
   };
 
   const isUnique = (cardId) => {
     if (cardsId.includes(cardId)) {
-      setScore(0);
       setCardsId([]);
     } else {
-      setCardsId([...cardsId, cardId]);
-      incrementScore();
+      const newCardsId = [...cardsId, cardId];
+      setCardsId(newCardsId);
+      bestScores(newCardsId.length);
     }
   };
 
   return (
     <div className='container'>
-      {isWin ? (
+      {cardsId.length === 12 ? (
         <TryAgain
           onClick={() => {
             resetScores();
           }}
         ></TryAgain>
       ) : null}
-      <NavBar score={score} bestScore={bestScore}></NavBar>
+      <NavBar score={cardsId.length} bestScore={bestScore}></NavBar>
 
       <div className='wrapper-cards'>
         <DisplayCards isUnique={isUnique}></DisplayCards>
